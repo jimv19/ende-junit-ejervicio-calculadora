@@ -54,26 +54,75 @@ public class CalculadoraTest {
         var ex = assertThrows(OperacionNoValidaException.class, () -> Calculadora.dividir(4, 0),
                 "La división por cero no está permitida");
         assertEquals(OperacionNoValidaException.MSG, ex.getMessage());
-}
+    }
+
     @Test
-void dividirCasoNormal() throws OperacionNoValidaException {
-    assertEquals(5, Calculadora.dividir(10, 2));
-}
+    void dividirCasoNormal() throws OperacionNoValidaException {
+        assertEquals(2, Calculadora.dividir(12, 6));
+    }
 
-@Test
-void dividirDividendoNegativo() throws OperacionNoValidaException {
-    assertEquals(-5, Calculadora.dividir(-10, 2));
-}
+    @Test
+    void dividirNegativoEntrePositivo() throws OperacionNoValidaException {
+        assertEquals(-2, Calculadora.dividir(12, -6));
+    }
 
+    @Test
+    void dividirAmbosNegativos() throws OperacionNoValidaException {
+        assertEquals(2, Calculadora.dividir(-12, -6));
+    }
 
-@Test
-void dividirAmbosNegativos() throws OperacionNoValidaException {
-    assertEquals(5, Calculadora.dividir(-10, -2));
-}
+    @Test
+    void dividirCeroEntreNumero() throws OperacionNoValidaException {
+        assertEquals(0, Calculadora.dividir(0, 6));
+    }
 
-@Test
-void dividirCeroEntreNumero() throws OperacionNoValidaException {
-    assertEquals(0, Calculadora.dividir(0, 5));
-}
+    @Test
+    @DisplayName("Probar la división por cero")
+    void dividirCeroEntreCeroException() {
+        var ex = assertThrows(OperacionNoValidaException.class, () -> Calculadora.dividir(0, 0),
+                "No se puede dividir cero entre cero");
+        assertEquals(OperacionNoValidaException.MSG, ex.getMessage());
+    }
+
+    @Test
+    void dividirUnoEntreUno() throws OperacionNoValidaException {
+        assertEquals(1, Calculadora.dividir(1, 1));
+    }
+
+    @Test
+    void dividirMenosUnoEntreUno() throws OperacionNoValidaException {
+        assertEquals(-1, Calculadora.dividir(-1, 1));
+    }
+
+    @Test
+    void dividirUnoEntreMenosUno() throws OperacionNoValidaException {
+        assertEquals(-1, Calculadora.dividir(1, -1));
+    }
+
+    @Test
+    void dividirNumeroEntreUno() throws OperacionNoValidaException {
+        assertEquals(12, Calculadora.dividir(12, 1));
+    }
+
+    @Test
+    void dividirCualquieraEntreMenosUno() throws OperacionNoValidaException {
+        assertEquals(-12, Calculadora.dividir(12, -1));
+    }
+
+    @Test
+    @DisplayName("Pruebas múltiples de división sin excepciones")
+    void pruebasMultiplesDivision() throws OperacionNoValidaException {
+        assertAll("División",
+                () -> assertEquals(2, Calculadora.dividir(12, 6), "12 / 6 = 2"),
+                () -> assertEquals(-2, Calculadora.dividir(-12, 6), "-12 / 6 = -2"),
+                () -> assertEquals(-2, Calculadora.dividir(12, -6), "12 / -6 = -2"),
+                () -> assertEquals(2, Calculadora.dividir(-12, -6), "-12 / -6 = 2"),
+                () -> assertEquals(0, Calculadora.dividir(0, 6), "0 / 6 = 0"),
+                () -> assertEquals(1, Calculadora.dividir(1, 1), "1 / 1 = 1"),
+                () -> assertEquals(-1, Calculadora.dividir(-1, 1), "-1 / 1 = -1"),
+                () -> assertEquals(-1, Calculadora.dividir(1, -1), "1 / -1 = -1"),
+                () -> assertEquals(12, Calculadora.dividir(12, 1), "12 / 1 = 12"),
+                () -> assertEquals(-12, Calculadora.dividir(12, -1), "12 / -1 = -12"));
+    }
 
 }
