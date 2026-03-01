@@ -11,7 +11,7 @@ Este proyecto sirve para practicar como funcionan las pruebas unitarias con *JUn
 En una empresa, un proyecto asi se usaría para:
     * Asegurarse de  que el codigo  funciona antes de fusionarlo con el resto del programa.
     * Evitar errores cuando alguien modifica una parte del código.
-    *Comprobar automáticamente que los métodos siguen devolviendo lo que deben.
+    * Comprobar automáticamente que los métodos siguen devolviendo lo que deben.
     * Apresnder a trabajar con calidad, que es algo que se pide mucho en entornos profesionales.
 
 Aunque no tenga main, ni scannerm ni nada que se ejecute, tiene sentido por que su objetivo no es usar el programa, si no probarlo.
